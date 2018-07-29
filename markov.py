@@ -13,16 +13,17 @@ class Markov(object):
 	def loadDictionary(self,dictFile):
 		filey = open(dictFile,'r')
 		self.markovDict = eval(filey.read())
+		#print(self.markovDict)
 
 
 	def generateText(self):
 		key = list(rm.choice(self.markovDict['#BEGIN#']))
-		genStr = " ".join( key )
-		for _ in range( self.sentLength ):
+		genStr = " ".join(key)
+		for _ in range(self.sentLength):
 			newKey = self.markovDict.setdefault( tuple(key), "") 
 			if(newKey == ""):
 				break
-			newVal = rm.choice( newKey )
+			newVal = rm.choice(newKey)
 			genStr = genStr + " " + newVal
 
 			key.pop(0)
